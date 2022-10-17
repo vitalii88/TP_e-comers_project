@@ -1,0 +1,26 @@
+{
+  "name": "tp_e-comers_project",
+  "version": "0.0.1",
+  "description": "Training e-comers project with Express and MD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitalii88/TP_e-comers_project.git"
+  },
+  "author": "Vitalii Bairak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitalii88/TP_e-comers_project/issues"
+  },
+  "homepage": "https://github.com/vitalii88/TP_e-comers_project#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "husky": "^8.0.1",
+    "standard-version": "^9.5.0"
+  }
+}
