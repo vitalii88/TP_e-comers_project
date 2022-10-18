@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 
 import dbConnector from './db/dbConnector.js';
 import * as middleware from './middleware/index.js'
@@ -12,8 +13,12 @@ const MONGO_URL = process.env.MONGO_DB_URL;
 
 const app = express();
 
+app.use(morgan('tiny'));
 app.use(express.json());
 app.use(cors());
+
+//routes
+app.get('/', (req, resp) => resp.send('e-commers api'));
 
 //middleware
 app.use(middleware.notFoundMiddleware);
