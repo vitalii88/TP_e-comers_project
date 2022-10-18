@@ -6,6 +6,7 @@ import morgan from 'morgan';
 
 import dbConnector from './db/dbConnector.js';
 import * as middleware from './middleware/index.js'
+import * as routes from './routes/index.js'
 
 dotenv.config();
 const PORT = process.env.PORT || 5001;
@@ -19,6 +20,7 @@ app.use(cors());
 
 //routes
 app.get('/', (req, resp) => resp.send('e-commers api'));
+app.use('/api/v1/auth', routes.authRoutes);
 
 //middleware
 app.use(middleware.notFoundMiddleware);
