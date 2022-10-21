@@ -15,4 +15,16 @@ export const isTokenValid = ({ token }) => {
   const isValid = jwt.verify(token, JWT_SECRET);
 
   return isValid;
+};
+
+export const attachCookieToResponse = ({ resp, user }) => {
+  const token = createJWT({ payload: user });
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  resp.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + oneDay),
+    secure: process.env.NODE_ENV === 'production',
+    signed: true,
+  });
 }

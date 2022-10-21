@@ -1,5 +1,5 @@
-import * as jwt from './jwt.js';
+import * as jwtUtils from './jwt.js';
 
 export {
-  jwt,
+  jwtUtils,
 }
