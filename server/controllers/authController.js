@@ -29,7 +29,28 @@ export const register = async (req, resp) => {
 };
 
 export const login = async (req, resp) => {
-  resp.send('login user');
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new CustomErrors.BadRequestError('Please provide email and password');
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new CustomErrors.UnauthenticatedError('Invalid Credentials');
+  }
+
+  const isPasswordCorrect = await user.comparePassword(password);
+  if (!isPasswordCorrect) {
+    throw new CustomErrors.UnauthenticatedError('Invalid Credentials');
+  }
+  const tokenUser = {
+    name: user.name,
+    userId: user._id,
+    role: user.role,
+  };
+  jwtUtils.attachCookieToResponse({ resp, user: tokenUser });
+
+  resp.status(StatusCodes.CREATED).json({ user: tokenUser });
 };
 
 export const logout = async (req, resp) => {
