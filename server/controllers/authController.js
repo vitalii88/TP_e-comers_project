@@ -54,5 +54,9 @@ export const login = async (req, resp) => {
 };
 
 export const logout = async (req, resp) => {
-  resp.send('logout user');
+  resp.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now() + 5 * 1000),
+  });
+  resp.statusCode(StatusCodes.OK).json({ msg: 'User logged out' });
 };
