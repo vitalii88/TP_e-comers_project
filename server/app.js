@@ -24,6 +24,7 @@ app.use(cors());
 //routes
 app.get('/', (req, resp) => resp.send('e-commers api'));
 app.use('/api/v1/auth', routes.authRoutes);
+app.use('/api/v1/users', routes.userRoutes);
 
 //middleware
 app.use(middleware.notFoundMiddleware);
