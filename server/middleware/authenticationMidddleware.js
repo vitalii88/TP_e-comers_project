@@ -1,7 +1,7 @@
-import { UnauthenticatedError } from '../errors/index.js';
+import { UnauthenticatedError, UnauthorizedError } from '../errors/index.js';
 import { jwtUtils } from '../utils/index.js';
 
-const authenticateUser = async (req, resp, next) => {
+export const authenticateUser = async (req, resp, next) => {
   const token = req.signedCookies.token
 
   if (!token) {
@@ -16,7 +16,14 @@ const authenticateUser = async (req, resp, next) => {
   } catch (error) {
     throw new UnauthenticatedError('Authentication Invalid');
   }
-
 };
 
-export default authenticateUser;
+export const authorizePermission = (...roles) => {
+  return (req, resp, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new UnauthorizedError('Unauthorizen to access this route');
+    }
+    next();
+  };
+};
+

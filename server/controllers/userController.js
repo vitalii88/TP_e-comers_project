@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import { StatusCodes } from 'http-status-codes';
-import { CustomApiError, NotFoundError } from '../errors/index.js'
+import { NotFoundError } from '../errors/index.js'
 
 export const getAllUsers = async (req, resp) => {
   const users = await User.find({ role: 'user' }).select('-password');
